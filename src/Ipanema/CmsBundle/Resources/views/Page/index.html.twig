@@ -3,12 +3,18 @@
 {% block title %}{{ cmfMainContent.title|striptags }}{% endblock %}
 
 {% block content %}
+<div class="breadcrumb">
+    <ul>
+        {% for title, url in knp_menu_get('simple').currentItem.breadcrumbsArray %}
+            <li><a href="{{url}}">{{ title }}</a></li>
+            <span class="divider">/</span>
+        {% endfor %}
+    </ul>
+</div>
 
-    <h1>{{cmfMainContent.title }}</h1>
-    {{ cmfMainContent.body }}
-    {# createphp cmfMainContent as="rdf" %}
+    {% createphp cmfMainContent as="rdf" %}
     {{ rdf|raw }}
-    {% endcreatephp #}
+    {% endcreatephp %}
 
 {% endblock %}
 
